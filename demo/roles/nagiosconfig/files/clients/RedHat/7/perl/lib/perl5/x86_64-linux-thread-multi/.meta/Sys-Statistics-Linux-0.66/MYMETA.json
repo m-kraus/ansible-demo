@@ -1,0 +1,100 @@
+{
+   "abstract" : "Front-end module to collect system statistics",
+   "author" : [
+      "Jonny Schulz"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Module::Build version 0.4005, CPAN::Meta::Converter version 2.120921",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Sys-Statistics-Linux",
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.36"
+         }
+      },
+      "runtime" : {
+         "recommends" : {
+            "YAML::Syck" : "0"
+         },
+         "requires" : {
+            "Carp" : "0",
+            "POSIX" : "0",
+            "Test::More" : "0",
+            "Time::HiRes" : "0",
+            "UNIVERSAL" : "0"
+         }
+      }
+   },
+   "provides" : {
+      "Sys::Statistics::Linux" : {
+         "file" : "lib/Sys/Statistics/Linux.pm",
+         "version" : "0.66"
+      },
+      "Sys::Statistics::Linux::Compilation" : {
+         "file" : "lib/Sys/Statistics/Linux/Compilation.pm",
+         "version" : "0.10"
+      },
+      "Sys::Statistics::Linux::CpuStats" : {
+         "file" : "lib/Sys/Statistics/Linux/CpuStats.pm",
+         "version" : "0.20"
+      },
+      "Sys::Statistics::Linux::DiskStats" : {
+         "file" : "lib/Sys/Statistics/Linux/DiskStats.pm",
+         "version" : "0.24"
+      },
+      "Sys::Statistics::Linux::DiskUsage" : {
+         "file" : "lib/Sys/Statistics/Linux/DiskUsage.pm",
+         "version" : "0.14"
+      },
+      "Sys::Statistics::Linux::FileStats" : {
+         "file" : "lib/Sys/Statistics/Linux/FileStats.pm",
+         "version" : "0.09"
+      },
+      "Sys::Statistics::Linux::LoadAVG" : {
+         "file" : "lib/Sys/Statistics/Linux/LoadAVG.pm",
+         "version" : "0.08"
+      },
+      "Sys::Statistics::Linux::MemStats" : {
+         "file" : "lib/Sys/Statistics/Linux/MemStats.pm",
+         "version" : "0.16"
+      },
+      "Sys::Statistics::Linux::NetStats" : {
+         "file" : "lib/Sys/Statistics/Linux/NetStats.pm",
+         "version" : "0.21"
+      },
+      "Sys::Statistics::Linux::PgSwStats" : {
+         "file" : "lib/Sys/Statistics/Linux/PgSwStats.pm",
+         "version" : "0.18"
+      },
+      "Sys::Statistics::Linux::ProcStats" : {
+         "file" : "lib/Sys/Statistics/Linux/ProcStats.pm",
+         "version" : "0.20"
+      },
+      "Sys::Statistics::Linux::Processes" : {
+         "file" : "lib/Sys/Statistics/Linux/Processes.pm",
+         "version" : "0.38"
+      },
+      "Sys::Statistics::Linux::SockStats" : {
+         "file" : "lib/Sys/Statistics/Linux/SockStats.pm",
+         "version" : "0.09"
+      },
+      "Sys::Statistics::Linux::SysInfo" : {
+         "file" : "lib/Sys/Statistics/Linux/SysInfo.pm",
+         "version" : "0.13"
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "license" : [
+         "http://dev.perl.org/licenses/"
+      ]
+   },
+   "version" : "0.66"
+}

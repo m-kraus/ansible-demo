@@ -1,0 +1,5 @@
+---
+nagiosconfig_path: '/omd/sites/monitoring/etc/nagios/conf.d/dynamic'
+
+src_plugins_dir: "clients/{{ ansible_os_family }}/{{ ansible_distribution_major_version }}"
+dest_plugins_dir: "{{ ansible_user_dir }}/plugins"

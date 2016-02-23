@@ -1,0 +1,86 @@
+# Nagios config file for
+# {{ inventory_hostname }} ( {{ ansible_hostname }} )
+#
+# RedHat
+#
+# Domain: {{ ansible_domain }}
+# FQDN: {{ ansible_fqdn }}
+#
+# Default IPv4: {{ ansible_default_ipv4.address }}
+#
+# Architecture: {{ ansible_architecture }}
+# OS Family: {{ ansible_os_family }}
+# OS: {{ ansible_distribution }}{{ ansible_distribution_major_version }} {{ ansible_distribution_version }}
+# Kernel: {{ ansible_kernel }}
+#
+# Kind: {{ kind | default("not set") }}
+# Function: {{ function | default("not set") }}
+
+define service {
+  use                   generic-service
+  host_name             {{ inventory_hostname }}
+  service_description   CPU Usage
+  check_command         check_by_ssh!{{ dest_plugins_dir }}/check_linux_stats.pl -C -w 90 -c 100 -s 5
+}
+
+define service {
+  use                   generic-service
+  host_name             {{ inventory_hostname }}
+  service_description   Load average
+  check_command         check_by_ssh!{{ dest_plugins_dir }}/check_linux_stats.pl -L -w 10,8,5 -c 20,18,15
+}
+
+define service {
+  use                   generic-service
+  host_name             {{ inventory_hostname }}
+  service_description   Memory usage
+  check_command         check_by_ssh!{{ dest_plugins_dir }}/check_linux_stats.pl -M -w 99,50 -c 100,50
+}
+
+{% for mount in ansible_mounts %}
+define service {
+  use                   generic-service
+  host_name             {{ inventory_hostname }}
+  service_description   Disk usage {{ mount["mount"] }}
+  check_command         check_by_ssh!{{ dest_plugins_dir }}/check_linux_stats.pl -D -w 10 -c 5 -p {{ mount["mount"] }}
+}
+
+{% endfor %}
+
+{% for device in ansible_devices %}
+{% for partition in ansible_devices[device]["partitions"] %}
+define service {
+  use                   generic-service
+  host_name             {{ inventory_hostname }}
+  service_description   Disk IO {{ partition }}
+  check_command         check_by_ssh!{{ dest_plugins_dir }}/check_linux_stats.pl -I -w 100,70 -c 150,100 -p {{ partition }}
+}
+
+{% endfor %}
+{% endfor %}
+
+
+{% for interface in ansible_interfaces %}{% if interface != "lo" %} 
+define service {
+  use                   generic-service
+  host_name             {{ inventory_hostname }}
+  service_description   Network usage {{ interface }}
+  check_command         check_by_ssh!{{ dest_plugins_dir }}/check_linux_stats.pl -N -w 30000 -c 45000 -p {{ interface }}
+}
+
+{% endif %}{% endfor %}
+
+define service {
+  use                   generic-service
+  host_name             {{ inventory_hostname }}
+  service_description   Open files
+  check_command         check_by_ssh!{{ dest_plugins_dir }}/check_linux_stats.pl -F -w 10000,150000 -c 15000,250000
+}
+
+define service {
+  use                   generic-service
+  host_name             {{ inventory_hostname }}
+  service_description   Socket usage
+  check_command         check_by_ssh!{{ dest_plugins_dir }}/check_linux_stats.pl -S -w 1000 -c 2000
+}
+

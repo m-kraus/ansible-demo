@@ -1,0 +1,32 @@
+# Nagios config file for
+# {{ inventory_hostname }} ( {{ ansible_hostname }} )
+#
+# Apache
+#
+# Domain: {{ ansible_domain }}
+# FQDN: {{ ansible_fqdn }}
+#
+# Default IPv4: {{ ansible_default_ipv4.address }}
+#
+# Architecture: {{ ansible_architecture }}
+# OS Family: {{ ansible_os_family }}
+# OS: {{ ansible_distribution }}{{ ansible_distribution_major_version }} {{ ansible_distribution_version }}
+# Kernel: {{ ansible_kernel }}
+#
+# Kind: {{ kind | default("not set") }}
+# Function: {{ function | default("not set") }}
+
+define service {
+  use                   generic-service
+  host_name             {{ inventory_hostname }}
+  service_description   Apache Running
+  check_command         check_by_ssh!{{ dest_plugins_dir }}/{{ ansible_architecture }}/check_procs -C httpd -c 1:
+}
+
+define service {
+  use                   generic-service
+  host_name             {{ inventory_hostname }}
+  service_description   Apache Reachability
+  check_command         check_http!-f follow -e 403 -w 3 -c 5
+}
+

@@ -1,0 +1,4 @@
+---
+- name: reload_omd
+  become: yes
+  local_action: command omd reload monitoring naemon

@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: no
+  tasks:
+
+  - name: Install needed packages
+    yum:
+      name: "{{ item }}"
+      state: latest
+    with_items:
+      - rsync
+      - perl-core

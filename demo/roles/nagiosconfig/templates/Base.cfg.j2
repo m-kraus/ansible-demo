@@ -1,0 +1,33 @@
+# Nagios config file for
+# {{ inventory_hostname }} ( {{ ansible_hostname }} )
+#
+# Base
+#
+# Domain: {{ ansible_domain }}
+# FQDN: {{ ansible_fqdn }}
+#
+# Default IPv4: {{ ansible_default_ipv4.address }}
+#
+# Architecture: {{ ansible_architecture }}
+# OS Family: {{ ansible_os_family }}
+# OS: {{ ansible_distribution }}{{ ansible_distribution_major_version }} {{ ansible_distribution_version }}
+# Kernel: {{ ansible_kernel }}
+#
+# Kind: {{ kind | default("not set") }}
+# Function: {{ function | default("not set") }}
+
+define host {
+  use		        generic-host
+  host_name	        {{ inventory_hostname }}
+  address	        {{ ansible_hostname }}
+  alias		        {{ inventory_hostname }} - {{ ansible_distribution }}{{ ansible_distribution_major_version }} {{ ansible_distribution_version }} - {{ ansible_kernel }}
+  hostgroups            hg_{{ ansible_os_family }},hg_{{ ansible_os_family }}{{ ansible_distribution_major_version }}
+  check_command         check-host-alive
+}
+
+define service {
+  use                   generic-service
+  host_name             {{ inventory_hostname }}
+  service_description   SSH
+  check_command         check_ssh
+}

@@ -1,0 +1,1 @@
+Ansible demo environment with role "nagiosconfig" for generating nagios configs out of ansible facts.

@@ -1,0 +1,49 @@
+---
+
+- name: Ensure needed directories on target host exist
+  file:
+    dest: "{{ dest_plugins_dir }}"
+    state: directory
+
+# rsync needs to be installed - in this demo this is already provisioned
+- name: Synchronize nagios plugins to target host
+  synchronize:
+    src: "{{ src_plugins_dir }}/"
+    dest: "{{ dest_plugins_dir }}"
+    recursive: yes
+
+# Search for Applications
+# Apache
+- name: Search for an Apache in /usr/sbin/httpd
+  stat:
+    path: /usr/sbin/httpd
+  register: httpd
+
+- name: Create directories on monitoring host
+  local_action:
+    module: file
+    dest: "{{ nagiosconfig_path }}/{{ inventory_hostname }}"
+    state: directory
+
+- name: Create OMD configuration files (Base)
+  local_action:
+    module: template
+    src: "Base.cfg.j2"
+    dest: "{{ nagiosconfig_path }}/{{ inventory_hostname }}/Base.cfg"
+  notify: reload_omd
+
+- name: Create OMD configuration files (Detailed)
+  local_action:
+    module: template
+    src: "{{ ansible_os_family }}.cfg.j2"
+    dest: "{{ nagiosconfig_path }}/{{ inventory_hostname }}/{{ ansible_os_family }}.cfg"
+  notify: reload_omd
+
+- name: Create OMD configuration files (Apache)
+  local_action:
+    module: template
+    src: "Apache.cfg.j2"
+    dest: "{{ nagiosconfig_path }}/{{ inventory_hostname }}/Apache.cfg"
+  notify: reload_omd
+  when:
+    - httpd.stat.exists
