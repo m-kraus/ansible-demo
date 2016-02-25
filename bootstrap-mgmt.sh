@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
 yum --nogpg -y install epel-release
-yum -y install --enablerepo=epel-testing ansible
 
+yum -y install vim tree python-pip gcc python-devel sshpass
 
-yum -y install vim tree
+pip install ansible
+
+su vagrant -c 'ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa'
 
 
 SITE=monitoring
@@ -23,8 +25,19 @@ omd config $SITE set THRUK_COOKIE_AUTH on
 omd config $SITE set NAGVIS_URLS thruk
 omd config $SITE set PNP4NAGIOS off
 
+cp -a /vagrant/demo/demo.cfg /omd/sites/$SITE/etc/nagios/conf.d/
+cp -a /vagrant/demo/thruk_local.conf /omd/sites/$SITE/etc/thruk/
+chown -R $SITE: /omd/sites/$SITE/etc/nagios/conf.d
+chown -R $SITE: /omd/sites/$SITE/etc/thruk/
+
 mkdir -p /omd/sites/$SITE/etc/nagios/conf.d/dynamic
 chown -R vagrant: /omd/sites/$SITE/etc/nagios/conf.d/dynamic
+
+su $SITE -c 'ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa'
+cp -p /home/vagrant/.ssh/id_rsa /omd/sites/$SITE/.ssh/id_rsa_vagrant
+cp -p /home/vagrant/.ssh/id_rsa.pub /omd/sites/$SITE/.ssh/id_rsa_vagrant.pub
+chown $SITE: /omd/sites/$SITE/.ssh/id_rsa_vagrant*
+
 
 omd start $SITE
 
