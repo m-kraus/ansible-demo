@@ -25,8 +25,11 @@ omd config $SITE set THRUK_COOKIE_AUTH on
 omd config $SITE set NAGVIS_URLS thruk
 omd config $SITE set PNP4NAGIOS off
 
-cp -a /vagrant/demo/demo.cfg /omd/sites/$SITE/etc/nagios/conf.d/
-cp -a /vagrant/demo/thruk_local.conf /omd/sites/$SITE/etc/thruk/
+pushd /omd/sites/$SITE/etc/thruk/themes-enabled
+tar xzvf /vagrant/omd/ConSolXT.tar.gz
+popd
+cp -a /vagrant/omd/demo.cfg /omd/sites/$SITE/etc/nagios/conf.d/
+cp -a /vagrant/omd/thruk_local.conf /omd/sites/$SITE/etc/thruk/
 chown -R $SITE: /omd/sites/$SITE/etc/nagios/conf.d
 chown -R $SITE: /omd/sites/$SITE/etc/thruk/
 
@@ -44,6 +47,7 @@ omd start $SITE
 
 # copy examples into /home/vagrant (from inside the mgmt node)
 cp -a /vagrant/demo/* /home/vagrant
+cp -a /vagrant/demo/.vim* /home/vagrant
 chown -R vagrant:vagrant /home/vagrant
 
 # configure hosts file for our internal network defined by Vagrantfile
