@@ -14,15 +14,10 @@ endif
 
 set background=dark
 set t_Co=256
-color molokai
+color delek
 let g:rehash256 = 1
 
-filetype off
-
-let mapleader = ","
-
-" Show partial commands in the last line of the screen
-set showcmd
+filetype on
 
 " When opening a new line and no filetype-specific indenting is enabled, keep
 " the same indent as the line you're currently on. Useful for READMEs, etc.
@@ -64,7 +59,7 @@ set hidden
 set ttyfast
 set ruler
 set backspace=indent,eol,start
-set laststatus=2
+"set laststatus=2
 
 set cursorline
 

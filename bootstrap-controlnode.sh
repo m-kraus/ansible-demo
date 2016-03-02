@@ -47,7 +47,8 @@ omd start $SITE
 
 # copy examples into /home/vagrant (from inside the mgmt node)
 cp -a /vagrant/demo/* /home/vagrant
-cp -a /vagrant/demo/.vim* /home/vagrant
+cp -a /vagrant/demo/.vimrc /home/vagrant/
+cp -a /vagrant/demo/.bashrc /home/vagrant/
 chown -R vagrant:vagrant /home/vagrant
 
 # configure hosts file for our internal network defined by Vagrantfile
@@ -55,22 +56,22 @@ cat >> /etc/hosts <<EOL
 
 # vagrant environment nodes
 10.0.15.10  controlnode
-10.0.15.21  nodeweb1
-10.0.15.22  nodeweb2
-10.0.15.23  nodeweb3
-10.0.15.24  nodeweb4
-10.0.15.25  nodeweb5
-10.0.15.26  nodeweb6
-10.0.15.27  nodeweb7
-10.0.15.28  nodeweb8
-10.0.15.29  nodeweb9
-10.0.15.31  nodeapp1
-10.0.15.32  nodeapp2
-10.0.15.33  nodeapp3
-10.0.15.34  nodeapp4
-10.0.15.35  nodeapp5
-10.0.15.36  nodeapp6
-10.0.15.37  nodeapp7
-10.0.15.38  nodeapp8
-10.0.15.39  nodeapp9
+10.0.15.21  web1
+10.0.15.22  web2
+10.0.15.23  web3
+10.0.15.24  web4
+10.0.15.25  web5
+10.0.15.26  web6
+10.0.15.27  web7
+10.0.15.28  web8
+10.0.15.29  web9
+10.0.15.31  app1
+10.0.15.32  app2
+10.0.15.33  app3
+10.0.15.34  app4
+10.0.15.35  app5
+10.0.15.36  app6
+10.0.15.37  app7
+10.0.15.38  app8
+10.0.15.39  app9
 EOL
