@@ -2,7 +2,7 @@
 
 yum --nogpg -y install epel-release
 
-yum -y install vim tree python-pip gcc python-devel sshpass
+yum -y install vim tree python-pip gcc python-devel sshpass libffi-devel openssl-devel
 
 pip install ansible
 
