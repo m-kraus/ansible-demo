@@ -2,9 +2,13 @@
 
 yum --nogpg -y install epel-release
 
-yum -y install vim tree python-pip gcc python-devel sshpass libffi-devel openssl-devel
+# Ansible from PIP
+#yum -y install vim tree rsync python-pip gcc python-devel sshpass libffi-devel openssl-devel
+#pip install ansible
+#pip install setuptools --upgrade
 
-pip install ansible
+# Ansible from EPEL
+yum -y install vim tree rsync sshpass ansible
 
 su vagrant -c 'ssh-keygen -t rsa -N "" -f ~/.ssh/id_rsa'
 
