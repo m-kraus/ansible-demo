@@ -11,3 +11,5 @@ fi
 # User specific aliases and functions
 alias ll='ls -l --color=none'
 alias tree='tree -L 2'
+
+alias ansible_nagios='ANSIBLE_CONFIG=~/.ansible_nagios.cfg ansible-playbook'

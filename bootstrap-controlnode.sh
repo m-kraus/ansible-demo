@@ -51,8 +51,9 @@ omd start $SITE
 
 # copy examples into /home/vagrant (from inside the mgmt node)
 cp -a /vagrant/demo/* /home/vagrant
-cp -a /vagrant/demo/.vimrc /home/vagrant/
 cp -a /vagrant/demo/.bashrc /home/vagrant/
+cp -a /vagrant/demo/.ansible.cfg /home/vagrant/
+cp -a /vagrant/demo/.ansible_nagios.cfg /home/vagrant/
 chown -R vagrant:vagrant /home/vagrant
 
 # configure hosts file for our internal network defined by Vagrantfile
