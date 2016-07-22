@@ -1,0 +1,7 @@
+ansible all -a "hostname"
+ansible all -a "hostname" -k
+ansible all -a "uptime" -k
+ansible-playbook distribute-ssh-keys.yml -k
+ansible web1 -m setup
+ansible-playbook generate_nagios_config.yml
+
