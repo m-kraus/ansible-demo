@@ -27,9 +27,7 @@ Vagrant.configure("2") do |config|
         node.vm.provider "virtualbox" do |vb|
           vb.memory = "256"
         end
-        node.vm.provision "ansible" do |ansible|
-          ansible.playbook = "provision-web.yml"
-        end
+        node.vm.provision :shell, path: "provision-web.sh"
     end
   end
   (1..2).each do |i|
@@ -41,9 +39,7 @@ Vagrant.configure("2") do |config|
         node.vm.provider "virtualbox" do |vb|
           vb.memory = "256"
         end
-        node.vm.provision "ansible" do |ansible|
-          ansible.playbook = "provision-app.yml"
-        end
+        node.vm.provision :shell, path: "provision-app.sh"
     end
   end
 

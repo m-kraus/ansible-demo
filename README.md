@@ -6,6 +6,8 @@
 
 Vagrant and Virtualbox need to be installed to run this demo.
 
+Note: Vagrant would be able to use Ansible-Playbooks for provisioning virtual machines. But to keep the dependencies on the host as small as possible, I opted to use Shell-script provisioning instead.
+
 ## Starting the demo
 
 After cloning this repository, change into the repo-directory:
