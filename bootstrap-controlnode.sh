@@ -53,7 +53,6 @@ omd start $SITE
 cp -a /vagrant/demo/* /home/vagrant
 cp -a /vagrant/demo/.bashrc /home/vagrant/
 cp -a /vagrant/demo/.ansible.cfg /home/vagrant/
-cp -a /vagrant/demo/.ansible_nagios.cfg /home/vagrant/
 chown -R vagrant:vagrant /home/vagrant
 
 # configure hosts file for our internal network defined by Vagrantfile
